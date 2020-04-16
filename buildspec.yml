@@ -3,11 +3,12 @@ version: 0.1
 phases:
   install:
     commands:
-      - gem install jekyll jekyll-paginate jekyll-sitemap jekyll-gist
+      - gem install jekyll jekyll-paginate jekyll-sitemap jekyll-gist bundler
+      - bundle install
   build:
     commands:
       - echo "******** Building Jekyll site ********"
-      - jekyll build
+      - bundle exec jekyll build
       - echo "******** Uploading to S3 ********"
       - aws s3 sync _site/ s3://daniel.spilsbury.io
       - aws cloudfront create-invalidation --distribution-id E3Q6XNPSG9BAQ9  --paths "/*"
