@@ -1,18 +1,17 @@
 # Site settings
-title: Jekyll-Uno
-description: 'Jekyll-Uno - a minimal, responsive theme for Jekyll'
-url: 'http://joshgerdes.com/jekyll-uno'
-baseurl: '/jekyll-uno'
-# google_analytics: 'UA-XXXXXX-X'
+title: DanspilS
+description: 'Information Security (InfoSec) Architect'
+url: 'https://daniel.spilsbury.io, https://daniel.spilsbury.uk, https://www.appsec.uk'
+baseurl: ''
+google_analytics: 'UA-86230134-1'
 # disqus_shortname: 'your-disqus-name'
 
 author:
-  name: 'Josh Gerdes'
-  email: josh@joshgerdes.com
-  twitter_username: joshgerdes
-  facebook_username: joshgerdes
-  github_username:  joshgerdes
-  linkedin_username:  joshgerdes
+  name: 'DanspilS'
+  email: security@spilsbury.io
+  twitter_username: danspils
+  github_username:  dmspils
+  linkedin_username:  danielspilsbury
 
 defaults:
   -
@@ -25,7 +24,8 @@ defaults:
 # Build settings
 destination: _site
 paginate: 10
-permalink: /:year/:title/
+permalink: /:categories/:year/:month/:day/:title:output_ext
+# permalink: /:year/:title/
 markdown: kramdown
 highlighter: rouge
 
@@ -40,4 +40,4 @@ kramdown:
   hard_wrap: false
 
 plugins: ['jekyll-paginate']
-exclude: ['README.md', 'Gemfile', 'Gemfile.lock', 'screenshot.png']
+exclude: ['README.md', 'Gemfile', 'Gemfile.lock', 'screenshot.png', 'humans.txt', 'LICENSE', 'execute.sh']

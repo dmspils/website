@@ -1,0 +1,3 @@
+Sitemap: https://daniel.spilsbury.io/sitemap.xml
+User-agent: *
+Disallow: /.well-known/SMIME-public-key.pem

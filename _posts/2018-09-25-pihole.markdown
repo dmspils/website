@@ -1,0 +1,122 @@
+---
+title:  "PiHole with DNS over HTTPS (DOH)"
+date:   2018-09-25 15:04:23
+categories: []
+tags: [PiHole, DNS, DoT]
+---
+A few people I know have set up [PiHole ad blocker][pihole] and really rave about it so I thought it was worth a look. The basic setup I used was as per the instructions on their website, appended with Dingo DNS over HTTPS (DoH) and with a Let's Encrypt web admin https cert installed. This page is effectively my build guide documented so that it may help anyone else looking to do the same but also in case I ever need to rebuild it!
+
+Initially I installed PiHole with Cloudflare's Argo DoH tool but that had a bunch of issues, mainly relating to the fact that it would load and run from a command line option but failed to parse the config yaml file on launch (this consumed a lot of effort to diagnose)! Plus, I fell out of love with Cloudflare so finding Dingo was a win.
+
+There are three basic steps:
+
+1. Install PiHole
+2. Add an HTTPS cert
+3. Install Dingo
+
+### Install PiHole
+
+``` bash
+curl -sSL https://install.pi-hole.net | bash
+```
+
+That gets PiHole up and running with default config.
+
+### Add an HTTPS cert
+
+Get yourself an HTTPS cert from your CA of choice and stick it somewhere with good access controls around it. PiHole makes use of lighttpd to serve its admin pages so go and edit the config file to point to your certs.
+
+However, I use Let's Encrypt certs and they need a bit of manipulating to get them into a form that lighttpd will accept; we need to concatenate the standard issue privkey.pem and cert.pem to get a combined file.
+
+``` bash
+cat privkey.pem cert.pem > combined.pem
+```
+
+Once you've got that, you'll need the combined.pem and the Let's Encrypt standard issue fullchain.pem files for lighttpd:
+
+``` bash
+sudo nano /etc/lighttpd/external.conf
+```
+
+``` python
+$HTTP["host"] == "pihole.barnacre.uk" {
+  # Ensure the Pi-hole Block Page knows that this is not a blocked domain
+  setenv.add-environment = ("fqdn" => "true")
+
+  # Enable the SSL engine with a LE cert, only for this specific host
+  $SERVER["socket"] == ":443" {
+    ssl.engine = "enable"
+    ssl.pemfile = "/home/pi/combined.pem"
+    ssl.ca-file =  "/home/pi/fullchain.pem"
+    ssl.honor-cipher-order = "enable"
+    ssl.cipher-list = "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH"
+    ssl.use-compression = "disable"
+    ssl.use-sslv2 = "disable"
+    ssl.use-sslv3 = "disable"
+  }
+
+  # Redirect HTTP to HTTPS
+  $HTTP["scheme"] == "http" {
+    $HTTP["host"] =~ ".*" {
+      url.redirect = (".*" => "https://%0$0")
+    }
+  }
+}
+```
+
+Restart lighttpd and hit the admin page and check that it's now served over https:
+
+``` bash
+service lighttpd restart
+```
+
+### Now install dingo.
+
+``` bash
+wget https://github.com/pforemski/dingo/releases/download/0.13/dingo-linux-amd64
+chmod +x dingo-linux.amd64
+```
+
+Run dingo to check that it's working. Note that we're binding to a non standard port as PiHole will be listening on 53, I've used 54 but you can take your pick. I'm also going to communicate with Google over IPv6 (hence the GDNS entry in IPv6):
+
+``` bash
+./dingo-linux-amd64 -port=54 -gdns:server=[2a00:1450:4009:80e::200e]:443
+```
+
+Check that all's good by doing a netstat:
+
+``` bash
+netstat -peanut | grep dingo
+```
+
+which should return a response along the lines of:
+``` bash
+udp        0      0 127.0.0.1:54            0.0.0.0:*                           0          18951       1135/dingo-linux-am
+```
+
+Also test that you can get a response:
+
+``` bash
+dig daniel.spilsbury.io A daniel.spilsbury.io AAAA -p54
+```
+
+which should return a positive response with A and AAAA records.
+
+Log on to PiHole admin console, go to settings -> DNS and enter a custom IPv4 entry of 127.0.0.1#54. Check the box next to it, remove any existing check boxes and click save.
+PiHole should now be resolving via Dingo and serving responses to your network appropriately.
+
+The last thing to do is to make sure that Dingo restarts automatically in case of a reboot.
+
+Edit /etc/rc.local to include the following:
+
+``` bash
+screen -dmS dingo4 /home/dan/dingo-linux-amd64 -port=54 -gdns:server=[2a00:1450:4009:80e::200e]:443
+```
+
+Done. You now just have to point your existing DNS queries towards your PiHole which depends totally on your setup. I run Sophos UTM so it's a case of setting IPv4 DHCP to point towards PiHole for DNS and also going in to the IPv6 prefix assignment and doing the same.
+
+There are a bunch of ways to check whether it's working ok but the simplest is to give it a couple of hours, check the PiHole admin page and look to see who is answering all your DNS resolution queries. Mine generally shows a split between localhost, cache and blocklist. That localhost element is crucial as PiHole is asking localhost, aka Dingo, to do all it's DNS lookups (which means that they are correctly being forwarded over https to Google).
+
+![crt.sh extract](/images/Screen Shot 2018-09-24 at 12.13.14.png){:class="img-responsive"}
+
+[pihole]:      https://pi-hole.net/
