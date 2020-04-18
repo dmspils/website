@@ -8,6 +8,7 @@ phases:
   build:
     commands:
       - bundle exec jekyll build
+      - cp robots.txt _site/robots.txt
       - cp security.txt _site/.well-known/security.txt
       - aws s3 sync _site/ s3://daniel.spilsbury.io
       - aws cloudfront create-invalidation --distribution-id E3Q6XNPSG9BAQ9  --paths "/*"
