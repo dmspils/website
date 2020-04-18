@@ -7,8 +7,7 @@ phases:
       - bundle install
   build:
     commands:
-      - echo "******** Building Jekyll site ********"
       - bundle exec jekyll build
-      - echo "******** Uploading to S3 ********"
+      - cp security.txt _site/.well-known/security.txt
       - aws s3 sync _site/ s3://daniel.spilsbury.io
       - aws cloudfront create-invalidation --distribution-id E3Q6XNPSG9BAQ9  --paths "/*"

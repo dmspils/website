@@ -21,5 +21,5 @@
 
 cd /Users/danielspilsbury/jekyll-uno/
 git add .
-git commit -m "new post"
+git commit -m "sort security.txt"
 git push -u origin master
