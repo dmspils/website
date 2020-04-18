@@ -2,7 +2,7 @@
 title:  "Data engineering: building security capability for modern business"
 date:   2017-09-06 20:15
 categories: []
-tags: [blog, HMRC, AppSec]
+tags: []
 ---
 Here's a blog that I had published whilst working for HMRC:
 

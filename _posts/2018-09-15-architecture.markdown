@@ -2,7 +2,7 @@
 title:  "site architecture and construction"
 date:   2018-09-15 20:15
 categories: []
-tags: [CSP, architecture, CAA, SRI, DNSSEC, lambda]
+tags: []
 ---
 This site is now in v3. v1 was EC2 hosted in AWS and served via nginx because that was the only way that I could serve Content Security Policy (CSP) headers. Using a CDN, Cloudfront or Cloudflare, meant that my headers would be stripped which was not cool.
 

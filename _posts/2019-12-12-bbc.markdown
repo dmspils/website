@@ -2,7 +2,7 @@
 title:  "BBC Application Security (AppSec) Blog"
 date:   2019-12-12 09:38
 categories: []
-tags: [blog, BBC, AppSec]
+tags: []
 ---
 Here's a review of the work that I did during 2019 whilst working for the BBC (under the heading Application Security (AppSec)):
 

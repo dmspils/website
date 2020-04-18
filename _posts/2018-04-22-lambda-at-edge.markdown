@@ -2,7 +2,7 @@
 title:  "Lambda@Edge"
 date:   2018-04-22 20:15
 categories: []
-tags: [AWS, lambda, CDN]
+tags: []
 ---
 CSP for AWS Cloudfront Lambda@Edge
 

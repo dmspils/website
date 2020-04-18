@@ -2,7 +2,7 @@
 title:  "PiHole with DNS over HTTPS (DOH)"
 date:   2018-09-25 15:04:23
 categories: []
-tags: [PiHole, DNS, DoT]
+tags: []
 ---
 A few people I know have set up [PiHole ad blocker][pihole] and really rave about it so I thought it was worth a look. The basic setup I used was as per the instructions on their website, appended with Dingo DNS over HTTPS (DoH) and with a Let's Encrypt web admin https cert installed. This page is effectively my build guide documented so that it may help anyone else looking to do the same but also in case I ever need to rebuild it!
 

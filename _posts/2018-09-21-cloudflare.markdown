@@ -3,7 +3,7 @@ title:  "Cloudflare wildcard certificate issuance and CAA weirdness"
 date:   2018-09-20 08:04:00
 categories: []
 published: true
-tags: [CAA, CloudFlare]
+tags: []
 ---
 As some of my other posts discuss, there are a number of security features that I trial using this site. One of those is SSL/TLS certificate based where I set a CAA record in my DNS. A CAA record tells all Certficate Authorities (CA) who is allowed to issue a certificate for a domain, which is quite a powerful feature for mitigating issues where CAs go rogue or get hacked.
 
