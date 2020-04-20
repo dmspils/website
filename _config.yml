@@ -1,7 +1,7 @@
 # Site settings
 title: DanspilS
 description: 'Information Security (InfoSec) Architect'
-url: 'https://daniel.spilsbury.io, https://daniel.spilsbury.uk, https://www.appsec.uk'
+url: 'https://daniel.spilsbury.io'
 baseurl: ''
 google_analytics: 'UA-86230134-1'
 # disqus_shortname: 'your-disqus-name'
