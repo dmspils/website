@@ -21,5 +21,5 @@
 
 cd /Users/danielspilsbury/jekyll-uno/
 git add .
-git commit -m "sort robots.txt"
+git commit -m "add evil js back in"
 git push -u origin master
