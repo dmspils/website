@@ -21,5 +21,5 @@
 
 cd /Users/danielspilsbury/jekyll-uno/
 git add .
-git commit -m "add evil js back in"
+git commit -m "add badge to buildspec"
 git push -u origin master
