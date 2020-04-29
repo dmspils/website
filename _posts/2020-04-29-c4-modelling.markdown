@@ -3,6 +3,7 @@ title:  "C4 modelling this website"
 date:   2020-04-29 10:00
 categories: []
 tags: []
+comments: true
 ---
 
 This site has been around for a few years now and has changed significantly, mainly from an infrastructure perspective, over that time. That can be done as the site gets very few hits so I can use it to test features and experiment without worrying about outages.‌

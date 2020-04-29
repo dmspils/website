@@ -3,6 +3,7 @@ title:  "C4 threat modelling this website"
 date:   2020-04-29 16:00
 categories: []
 tags: []
+comments: true
 ---
 
 My previous post looked at producing a C4 model for my (simple) website. This post takes that a step further and looks at how we can use C4 modelling to elicit security and privacy threats using two frameworks:
