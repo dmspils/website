@@ -17,7 +17,7 @@ That should be self explanatory but basically shows my website as a service in t
 
 Now let's have a look at some more detail so we expand on the 'Dan's Website' box in a level 2 container diagram:
 
-![website C4 context diagram](/images/website-Container.png){:class="img-responsive"}
+[![website C4 context diagram](/images/website-Container.png){:class="img-responsive"}](https://daniel.spilsbury.io/images/website-Container.png)
 
 Again, this should be relatively self explantatory, at least, that's the point of the diagram; you shouldn't need any other documentation to understand what is going on.
 
