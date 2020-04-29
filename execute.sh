@@ -21,5 +21,5 @@
 
 cd /Users/danielspilsbury/jekyll-uno/
 git add .
-git commit -m "change base url"
+git commit -m "new blog post"
 git push -u origin master
