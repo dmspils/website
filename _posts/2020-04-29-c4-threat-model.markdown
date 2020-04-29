@@ -47,8 +47,9 @@ And let's now overlay that diagram with some threat modelling metadata which is 
 [![website C4 context diagram](/images/website-Container-risks.png){:class="img-responsive"}](https://daniel.spilsbury.io/images/website-Container-risks.png)
 
 We now have seven aggregated risks which we can expand on as follows:
+
 |Risk  |Description  | How much do I care (think P:I) |
-|--|--|--|
+|----|------------|------------|
 |R1  | The webpage is rendered in the users browser which is an untrusted environment. Other malicious code could be executed in that same environment and interfere with or steal data from my application. | Not really, I don't want crypto miners running in user space so I'll use CSP to prevent that.  |
 |R2  | DNS sucks, it is in the clear and could be spoofed/modified so that a user is directed to a malicious endpoint. | This would suck too but it's kinda in the hands of the user to ensure they use good DNS practices e.g. DoT/H. However, I do use DS signing on my domain so if you check DNSSEC records then that will help. |
 |R3|The HTTP endpoint could be subject to volumetric based attacks which take it down, but, more importantly, cost me dollar!|I do care about the latter issue so have alerting in place and request limitations.|
