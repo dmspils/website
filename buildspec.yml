@@ -1,5 +1,8 @@
 version: 0.1
    
+env:
+  variables:
+    "JEKYLL_ENV": "production"
 phases:
   install:
     commands:
