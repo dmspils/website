@@ -21,5 +21,5 @@
 
 cd /Users/danielspilsbury/jekyll-uno/
 git add .
-git commit -m "disqus add in"
+git commit -m "tweak about"
 git push -u origin master
