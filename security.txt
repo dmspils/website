@@ -1,2 +1,3 @@
 Contact: security@spilsbury.io
 Permission: Knock yourself out!
+Encryption: https://keybase.io/danspils
