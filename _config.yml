@@ -1,14 +1,14 @@
 # Site settings
 title: DanspilS
 description: 'Information Security (InfoSec) Architect'
-url: 'https://daniel.spilsbury.io'
+url: 'https://daniel.spilsbury.uk'
 baseurl: ''
 google_analytics: UA-86230134-1
 #disqus_shortname: 'danspils'
 
 author:
   name: 'DanspilS'
-  email: security@spilsbury.io
+  email: daniel.spilsbury+website@gmail.com
   twitter_username: danspils
   github_username:  dmspils
   linkedin_username:  danielspilsbury
